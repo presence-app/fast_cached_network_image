@@ -293,7 +293,7 @@ class _FastCachedImageState extends State<FastCachedImage> with TickerProviderSt
           double.parse((received / total).toStringAsFixed(2));
           // _progress.value = tot != null ? _downloaded / _total! : 0;
           _progressData.progressPercentage.value = double.parse((received / total).toStringAsFixed(2));
-          widget.loadingBuilder!(context, _progressData);
+          if (mounted) widget.loadingBuilder!(context, _progressData);
         }
 
         chunkEvents.add(ImageChunkEvent(
