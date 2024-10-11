@@ -515,8 +515,8 @@ class FastCachedImageProvider extends ImageProvider<NetworkImage> implements Net
   }
 
   @override
-  ImageStreamCompleter loadBuffer(NetworkImage key, DecoderBufferCallback decode) {
-    final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
+  ImageStreamCompleter loadImage(NetworkImage key, ImageDecoderCallback decode) {
+      final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
       codec: _loadAsync(key as FastCachedImageProvider, chunkEvents, decode),
@@ -533,7 +533,7 @@ class FastCachedImageProvider extends ImageProvider<NetworkImage> implements Net
   Future<ui.Codec> _loadAsync(
     FastCachedImageProvider key,
     StreamController<ImageChunkEvent> chunkEvents,
-    DecoderBufferCallback decode,
+    ImageDecoderCallback decode,
   ) async {
     try {
       assert(key == this);
